@@ -1,0 +1,1 @@
+insert into battery(name) values ('Battery01');
