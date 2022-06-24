@@ -1,5 +1,6 @@
 package com.application.powerledgerapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,15 @@ public class BatteryService {
 	
 	public List<Battery> create(List<Battery> listOfBatteries){
 		return this.batteryRepository.saveAll(listOfBatteries);
+	}
+	
+	public List<String> getNames(Long minPostcode, Long maxPostcode){
+		List<Battery> batteriesInRange = this.batteryRepository.findByPostcodeBetween(minPostcode, maxPostcode);
+		List<String> names = new ArrayList<>();
+		
+		for(Battery battery: batteriesInRange) {
+			names.add(battery.getName());
+		}
+		return names;
 	}
 }

@@ -17,7 +17,7 @@ public class Battery {
 	private String name;
 	
 	@Column 
-	private String postcode;
+	private Long postcode;
 	
 	@Column
 	private String wattCapacity;
@@ -38,11 +38,11 @@ public class Battery {
 		this.name = name;
 	}
 
-	public String getPostcode() {
+	public Long getPostcode() {
 		return postcode;
 	}
 
-	public void setPostcode(String postcode) {
+	public void setPostcode(Long postcode) {
 		this.postcode = postcode;
 	}
 
