@@ -1,1 +1,1 @@
-insert into battery(name) values ('Battery01');
+insert into battery(name, postcode, watt_capacity) values ('Battery01', 'Postcode1', '200W');
