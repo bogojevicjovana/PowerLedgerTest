@@ -8,6 +8,7 @@ public class PowerLedgerAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PowerLedgerAppApplication.class, args);
+		
 	}
 
 }

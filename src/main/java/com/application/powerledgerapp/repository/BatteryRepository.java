@@ -11,4 +11,6 @@ import com.application.powerledgerapp.model.Battery;
 public interface BatteryRepository extends JpaRepository<Battery, Long> {
 
 	List<Battery> findByPostcodeBetween(Long min, Long max);
+
+	Battery findOneByName(String string);
 }

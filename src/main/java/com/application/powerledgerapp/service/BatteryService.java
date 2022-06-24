@@ -1,7 +1,9 @@
 package com.application.powerledgerapp.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,10 @@ public class BatteryService {
 		for(Battery battery: batteriesInRange) {
 			names.add(battery.getName());
 		}
-		return names;
-	}
+		
+		List<String> sortedList = names.stream()
+								  .sorted(Comparator.naturalOrder())
+								  .collect(Collectors.toList());
+		return sortedList;
+	}	
 }

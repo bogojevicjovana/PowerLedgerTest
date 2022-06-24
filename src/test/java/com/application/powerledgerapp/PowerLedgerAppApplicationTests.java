@@ -9,5 +9,4 @@ class PowerLedgerAppApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
