@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.powerledgerapp.model.Battery;
+import com.application.powerledgerapp.model.dto.StatisticsDto;
 import com.application.powerledgerapp.service.BatteryService;
 
 @RestController
@@ -33,5 +34,10 @@ public class BatteryController {
 		return new ResponseEntity<>(batteries, HttpStatus.OK);
 	}
 	
-
+	@GetMapping(value = "getStatistics/{min}/{max}", produces = "application/json")
+	public ResponseEntity<StatisticsDto> getStatistics(@PathVariable Long min, @PathVariable Long max){
+		StatisticsDto statistics = this.batteryService.getStatistics(min, max);
+		return new ResponseEntity<>(statistics, HttpStatus.OK);
+	}
+		
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.application.powerledgerapp.model.Battery;
+import com.application.powerledgerapp.model.dto.StatisticsDto;
 import com.application.powerledgerapp.repository.BatteryRepository;
 
 @Service
@@ -35,5 +36,14 @@ public class BatteryService {
 		return sortedList;
 	}	
 	
+	public StatisticsDto getStatistics(Long minPostcode, Long maxPostcode) {
+		List<String> names = getNames(minPostcode, maxPostcode);
+		
+		StatisticsDto statisticsDto = new StatisticsDto();
+		statisticsDto.setWattCapacitySum(this.batteryRepository.sumOfCapacity(names));
+		statisticsDto.setWatCapacityAverage(this.batteryRepository.avgOfCapacity(names));
+		
+		return statisticsDto;
+	}
 	
 }
