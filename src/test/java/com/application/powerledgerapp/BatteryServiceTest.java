@@ -46,7 +46,7 @@ class BatteryServiceTest {
 		batteries.add(b1);
 		batteries.add(b2);
 
-		List<Battery> saved = this.batteryService.create(batteries);
+		List<Battery> saved = batteryService.create(batteries);
 		
 		assertFalse(saved.isEmpty());
 	}
@@ -54,8 +54,8 @@ class BatteryServiceTest {
 	@Test
 	@Order(3)
 	void findInRange_noSuchPostcode() {
-		List<String> names = this.batteryService.getNames(1600000L, 1700000L);
-		List<Battery> batteries = this.batteryRepository.findByPostcodeBetween(1600000L, 1700000L);
+		List<String> names = batteryService.getNames(1600000L, 1700000L);
+		List<Battery> batteries = batteryRepository.findByPostcodeBetween(1600000L, 1700000L);
 		
 		List<String> result = new ArrayList<>();
 		for(Battery b: batteries) {
@@ -68,15 +68,15 @@ class BatteryServiceTest {
 	@Test
 	@Order(4)
 	void findInRange_returnsBatteryName() {
-		List<String> names = this.batteryService.getNames(12000L, 12300L);
+		List<String> names = batteryService.getNames(12000L, 12300L);
 		assertEquals("Venusta", names.get(0));
 	}
 	
 	@Test
 	@Order(5)
 	void getStatistics() {
-		StatisticsDto statistics = this.batteryService.getStatistics(12000L, 12500L);
-		List<Battery> result = this.batteryRepository.findByPostcodeBetween(12000L, 13000L);
+		StatisticsDto statistics = batteryService.getStatistics(12000L, 12500L);
+		List<Battery> result = batteryRepository.findByPostcodeBetween(12000L, 13000L);
 		
 		Long wattCapacitySum = result.get(0).getWattCapacity() + result.get(1).getWattCapacity();
 		Long wattCapacityAvg = wattCapacitySum/2;

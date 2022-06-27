@@ -17,11 +17,11 @@ public class BatteryService {
 	private BatteryRepository batteryRepository;
 	
 	public List<Battery> create(List<Battery> listOfBatteries){
-		return this.batteryRepository.saveAll(listOfBatteries);
+		return batteryRepository.saveAll(listOfBatteries);
 	}
 	
 	public List<String> getNames(Long minPostcode, Long maxPostcode){
-		List<Battery> batteriesInRange = this.batteryRepository.findByPostcodeBetween(minPostcode, maxPostcode);
+		List<Battery> batteriesInRange = batteryRepository.findByPostcodeBetween(minPostcode, maxPostcode);
 		
 		return batteriesInRange.stream().map(Battery::getName).sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 	}	
@@ -30,8 +30,8 @@ public class BatteryService {
 		List<String> names = getNames(minPostcode, maxPostcode);
 		
 		StatisticsDto statisticsDto = new StatisticsDto();
-		statisticsDto.setWattCapacitySum(this.batteryRepository.sumOfCapacity(names));
-		statisticsDto.setWatCapacityAverage(this.batteryRepository.avgOfCapacity(names));
+		statisticsDto.setWattCapacitySum(batteryRepository.sumOfCapacity(names));
+		statisticsDto.setWatCapacityAverage(batteryRepository.avgOfCapacity(names));
 		
 		return statisticsDto;
 	}
