@@ -20,4 +20,5 @@ public interface BatteryRepository extends JpaRepository<Battery, Long> {
 	
 	@Query(value = "SELECT avg(b.watt_capacity) from Battery b where b.name in :names", nativeQuery = true)
 	int avgOfCapacity(List<String> names);
+	
 }

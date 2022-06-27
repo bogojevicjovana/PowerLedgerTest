@@ -2,6 +2,9 @@ package com.application.powerledgerapp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Order;
@@ -20,20 +23,27 @@ import com.application.powerledgerapp.repository.BatteryRepository;
 @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @Transactional
-public class BatteryRepositoryTest {
+class BatteryRepositoryTest {
 	
 	@Autowired
 	private BatteryRepository batteryRepository;
 	
 	@Test
 	@Order(1)
-	public void should_create_new_battery() {
+	void should_create_new_battery() {
 		Battery battery = new Battery(1L, "Victus", 12500L, 3000L);
 		batteryRepository.save(battery);
 		
 		Battery batteryByName = batteryRepository.findOneByName("Victus");
 		assertThat(batteryByName).isNotNull();
-		
-		System.out.println(batteryByName.toString());
 	}	
+	
+	@Test
+	@Order(2)
+	void create_emptyListOfBatteries() {
+		List<Battery> batteries = new ArrayList<Battery>();
+		List<Battery> saved = batteryRepository.saveAll(batteries);
+		
+		assertThat(saved).isEmpty();
+	}
 }

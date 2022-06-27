@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class StatisticsDto {
 	
-	public int wattCapacitySum;
-	public int watCapacityAverage;
+	private int wattCapacitySum;
+	
+	private int watCapacityAverage;
 	
 }

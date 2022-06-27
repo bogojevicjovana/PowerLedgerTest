@@ -30,10 +30,8 @@ public class BatteryService {
 			names.add(battery.getName());
 		}
 		
-		List<String> sortedList = names.stream()
-								  .sorted(Comparator.naturalOrder())
-								  .collect(Collectors.toList());
-		return sortedList;
+		return names.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+		
 	}	
 	
 	public StatisticsDto getStatistics(Long minPostcode, Long maxPostcode) {
