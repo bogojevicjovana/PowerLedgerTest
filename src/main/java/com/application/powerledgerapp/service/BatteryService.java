@@ -1,6 +1,4 @@
 package com.application.powerledgerapp.service;
-
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,14 +22,8 @@ public class BatteryService {
 	
 	public List<String> getNames(Long minPostcode, Long maxPostcode){
 		List<Battery> batteriesInRange = this.batteryRepository.findByPostcodeBetween(minPostcode, maxPostcode);
-		List<String> names = new ArrayList<>();
 		
-		for(Battery battery: batteriesInRange) {
-			names.add(battery.getName());
-		}
-		
-		return names.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-		
+		return batteriesInRange.stream().map(Battery::getName).sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 	}	
 	
 	public StatisticsDto getStatistics(Long minPostcode, Long maxPostcode) {

@@ -31,19 +31,24 @@ class BatteryRepositoryTest {
 	@Test
 	@Order(1)
 	void should_create_new_battery() {
-		Battery battery = new Battery(1L, "Victus", 12500L, 3000L);
-		batteryRepository.save(battery);
-		
-		Battery batteryByName = batteryRepository.findOneByName("Victus");
-		assertThat(batteryByName).isNotNull();
-	}	
-	
+		Battery battery1 = new Battery(null, "Victus", 12500L, 3000L);
+		Battery battery2 = new Battery(null, "Victus", 56700L, 4000L);
+
+		List<Battery> batteries = new ArrayList<Battery>();
+		batteries.add(battery1);
+		batteries.add(battery2);
+
+		List<Battery> saved = batteryRepository.saveAll(batteries);
+
+		assertThat(saved).isNotNull();
+	}
+
 	@Test
 	@Order(2)
 	void create_emptyListOfBatteries() {
 		List<Battery> batteries = new ArrayList<Battery>();
 		List<Battery> saved = batteryRepository.saveAll(batteries);
-		
+
 		assertThat(saved).isEmpty();
 	}
 }
