@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.application.powerledgerapp.model.Battery;
+import com.application.powerledgerapp.model.dto.BatteryDto;
 import com.application.powerledgerapp.model.dto.StatisticsDto;
 import com.application.powerledgerapp.repository.BatteryRepository;
+import com.application.powerledgerapp.transform.BatteryTransform;
 
 @Service
 public class BatteryService {
@@ -16,8 +18,15 @@ public class BatteryService {
 	@Autowired
 	private BatteryRepository batteryRepository;
 	
-	public List<Battery> create(List<Battery> listOfBatteries){
-		return this.batteryRepository.saveAll(listOfBatteries);
+	@Autowired
+	private BatteryTransform batteryTransform;
+	
+	public List<BatteryDto> create(List<BatteryDto> listOfBatteries){
+		List<Battery> batteryList = batteryRepository.saveAll(listOfBatteries.stream()
+												      .map(batteryDto -> batteryTransform.transformToEntity(batteryDto))
+												      .collect(Collectors.toList()));
+		
+		return batteryList.stream().map(battery -> batteryTransform.transformToDto(battery)).collect(Collectors.toList());
 	}
 	
 	public List<String> getNames(Long minPostcode, Long maxPostcode){

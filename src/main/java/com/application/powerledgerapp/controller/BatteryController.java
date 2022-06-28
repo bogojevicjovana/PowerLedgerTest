@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.application.powerledgerapp.model.Battery;
+import com.application.powerledgerapp.model.dto.BatteryDto;
 import com.application.powerledgerapp.model.dto.StatisticsDto;
 import com.application.powerledgerapp.service.BatteryService;
 
@@ -24,7 +24,7 @@ public class BatteryController {
 	private BatteryService batteryService;
 	
 	@PostMapping(value = "/save", produces = "application/json")
-	public List<Battery> saveBatteries(@RequestBody List<Battery> listOfBatteries){
+	public List<BatteryDto> saveBatteries(@RequestBody List<BatteryDto> listOfBatteries){
 		return this.batteryService.create(listOfBatteries);
 	}
 	

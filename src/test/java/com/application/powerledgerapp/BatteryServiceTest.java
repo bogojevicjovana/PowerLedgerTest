@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.application.powerledgerapp.model.Battery;
+import com.application.powerledgerapp.model.dto.BatteryDto;
 import com.application.powerledgerapp.model.dto.StatisticsDto;
 import com.application.powerledgerapp.repository.BatteryRepository;
 import com.application.powerledgerapp.service.BatteryService;
+import com.application.powerledgerapp.transform.BatteryTransform;
 
 
 @SpringBootTest
@@ -29,7 +31,7 @@ class BatteryServiceTest {
 	
 	@Autowired
 	private BatteryRepository batteryRepository;
-
+	
 	@Test
 	@Order(1)
 	void contextLoads() throws Exception {
@@ -39,14 +41,14 @@ class BatteryServiceTest {
 	@Test
 	@Order(2)
 	void createBatteries_Success() {
-		Battery b1 = new Battery(1L, "Victus", 12505L, 200L);
-		Battery b2 = new Battery(2L, "Techno", 13005L, 300L);
+		BatteryDto b1 = new BatteryDto("Victus", 12505L, 200L);
+		BatteryDto b2 = new BatteryDto("Techno", 13005L, 300L);
 
-		List<Battery> batteries = new ArrayList<>();
+		List<BatteryDto> batteries = new ArrayList<>();
 		batteries.add(b1);
 		batteries.add(b2);
 
-		List<Battery> saved = this.batteryService.create(batteries);
+		List<BatteryDto> saved = this.batteryService.create(batteries);
 		
 		assertFalse(saved.isEmpty());
 	}
