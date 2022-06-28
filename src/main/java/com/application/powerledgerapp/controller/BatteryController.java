@@ -30,13 +30,13 @@ public class BatteryController {
 	
 	@GetMapping(value = "/findAll/{min}/{max}", produces = "application/json")
 	public ResponseEntity<List<String>> getBatteries(@PathVariable Long min, @PathVariable Long max){
-		List<String> batteries = this.batteryService.getNames(min, max);
+		List<String> batteries = batteryService.getNames(min, max);
 		return new ResponseEntity<>(batteries, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "getStatistics/{min}/{max}", produces = "application/json")
 	public ResponseEntity<StatisticsDto> getStatistics(@PathVariable Long min, @PathVariable Long max){
-		StatisticsDto statistics = this.batteryService.getStatistics(min, max);
+		StatisticsDto statistics = batteryService.getStatistics(min, max);
 		return new ResponseEntity<>(statistics, HttpStatus.OK);
 	}
 		
